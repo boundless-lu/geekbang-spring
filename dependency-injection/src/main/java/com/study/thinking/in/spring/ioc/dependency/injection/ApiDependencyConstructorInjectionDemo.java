@@ -1,30 +1,32 @@
 package com.study.thinking.in.spring.ioc.dependency.injection;
 
-import com.study.thinking.in.spring.ioc.overview.domain.User;
+
+
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 /**
- * @Description: 基于注解的依赖 Setter方法注入示例
+ * @Description: 基于API的依赖 Constructor 注入示例
  * @Author Xiaoyaoyou
  * @Date: 2020/8/6 17:44
  * @Version 1.0
  */
-public class AnnotationDependencySetterInjectionDemo {
+public class ApiDependencyConstructorInjectionDemo {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(AnnotationDependencySetterInjectionDemo.class);
+
+        BeanDefinition userHolderDefinition = createUserHolderBeanDefinition();
+        context.registerBeanDefinition("userHolder",userHolderDefinition);
+
 
         //设置Bean注册中心
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(context);
-        String path = "META-INF/dependency-lookup-context.xml";
-        reader.loadBeanDefinitions(path);
-
+        reader.loadBeanDefinitions("META-INF/dependency-lookup-context.xml");
 
         //启动应用上下文
         context.refresh();
-
 
         UserHolder bean = context.getBean(UserHolder.class);
         System.out.println(bean);
@@ -33,10 +35,9 @@ public class AnnotationDependencySetterInjectionDemo {
         context.close();
     }
 
-    @Bean
-    private UserHolder userHolder(User user){
-        UserHolder userHolder = new UserHolder();
-        userHolder.setUser(user);
-        return userHolder;
+    private static BeanDefinition createUserHolderBeanDefinition(){
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(UserHolder.class);
+        builder.addConstructorArgReference("superUser");
+        return builder.getBeanDefinition();
     }
 }
