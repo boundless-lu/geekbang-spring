@@ -15,12 +15,12 @@ public class DependencyLookupDemo {
     public static void main(String[] args) {
 
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("/META-INF/dependency-lookup-context.xml");
-//        lookupInrRealTime(beanFactory);
+        lookupInrRealTime(beanFactory);
 //        lookupInLazyTime(beanFactory);
 
-        lookupByType(beanFactory);
-        lookupCollectionByType(beanFactory);
-        lookupByAnnotation(beanFactory);
+//        lookupByType(beanFactory);
+//        lookupCollectionByType(beanFactory);
+//        lookupByAnnotation(beanFactory);
     }
 
     private static void lookupByAnnotation(BeanFactory beanFactory) {

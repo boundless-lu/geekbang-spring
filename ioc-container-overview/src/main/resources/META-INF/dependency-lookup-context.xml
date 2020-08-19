@@ -7,6 +7,16 @@
     <bean id="user" class="com.study.thinking.in.spring.ioc.overview.domain.User">
         <property name="id" value="15" />
         <property name="name" value="代璐" />
+        <property name="localConfigFile" value="classpath:/META-INF/user-config.properties" />
+        <property name="city" value="HANGZHOU" />
+        <property name="workCities" value="HANGZHOU,BEIJING" />
+        <property name="lifeCities" >
+            <list>
+                <value>BEIJING</value>
+                <value>SHANGHAI</value>
+            </list>
+        </property>
+
     </bean>
     <bean id="superUser" class="com.study.thinking.in.spring.ioc.overview.domain.SuperUser" parent="user" primary="true">
         <property name="address" value="杭州aaa" />
