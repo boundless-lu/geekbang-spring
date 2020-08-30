@@ -1,12 +1,15 @@
 package com.study.thinking.in.spring.ioc.overview.domain;
 
 import com.study.thinking.in.spring.ioc.overview.enumerate.City;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.core.io.Resource;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.List;
 
-public class User {
+public class User implements BeanNameAware {
 
     private Long id;
     private String name;
@@ -18,6 +21,8 @@ public class User {
     private City[] workCities;
 
     private List<City> lifeCities;
+
+    private transient String beanName;
 
     public static User createUser() {
         User user = new User();
@@ -84,5 +89,20 @@ public class User {
                 ", lifeCities=" + lifeCities +
                 ", localConfigFile=" + localConfigFile +
                 '}';
+    }
+
+    @PostConstruct
+    public void init(){
+        System.out.println("Bean Name :["+beanName+"] 初始化。。。");
+    }
+
+    @PreDestroy
+    public void destroy(){
+        System.out.println("Bean Name :["+beanName+"] 销毁中。。。");
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        this.beanName = name;
     }
 }
