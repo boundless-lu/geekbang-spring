@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="<spring:theme code='styleSheet'/>" type="text/css"/>
 </head>
 <body>
-\${userObject.name} : ${userObject.name}
+\${userObject.name} : ${userObject.name} <br>
+\${sessionScope: userObject.name} : ${sessionScope.keySet()} <br>
+\${applicationScope: scopedTarget.user.name} : ${applicationScope['scopedTarget.user'].name}<br>
+\${sessionScope: scopedTarget.user.name} : ${sessionScope['scopedTarget.user'].name}<br>
+
 </body>
 </html>
