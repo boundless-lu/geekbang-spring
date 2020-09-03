@@ -18,15 +18,15 @@ import org.springframework.core.io.support.EncodedResource;
 public class BeanMetadataConfigurationDemo {
 
     public static void main(String[] args) {
-        DefaultListableBeanFactory registry = new DefaultListableBeanFactory();
-        PropertiesBeanDefinitionReader reader = new PropertiesBeanDefinitionReader(registry);
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        PropertiesBeanDefinitionReader reader = new PropertiesBeanDefinitionReader(beanFactory);
         String local = "META-INF/user.properties";
         Resource resource = new ClassPathResource(local);
         EncodedResource encodedResource = new EncodedResource(resource,"UTF-8");
         int count = reader.loadBeanDefinitions(encodedResource);
         System.out.println("加载了"+count+"个元数据");
 
-        User user = registry.getBean("user", User.class);
+        User user = beanFactory.getBean("user", User.class);
         System.out.println(user);
 
     }

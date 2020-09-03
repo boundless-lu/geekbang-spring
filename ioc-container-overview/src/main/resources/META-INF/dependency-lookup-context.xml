@@ -4,6 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- RootBeanDefinition 不需要合并  不存在parent -->
+    <!-- 初始为普通BeanDefinition   GenericBeanDefinition  最终为RootBeanDefinition-->
     <bean id="user" class="com.study.thinking.in.spring.ioc.overview.domain.User">
         <property name="id" value="15" />
         <property name="name" value="代璐" />
@@ -18,6 +20,11 @@
         </property>
 
     </bean>
+
+
+    <!-- 普通BeanDefinition   GenericBeanDefinition -->
+    <!-- 合并后   GenericBeanDefinition 变成 RootBeanDefinition 并且覆盖parent相关配置 -->
+    <!-- primary = true    增加 address 属性 -->
     <bean id="superUser" class="com.study.thinking.in.spring.ioc.overview.domain.SuperUser" parent="user" primary="true">
         <property name="address" value="杭州aaa" />
     </bean>
