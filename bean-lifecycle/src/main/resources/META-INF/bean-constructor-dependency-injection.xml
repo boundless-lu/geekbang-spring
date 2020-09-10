@@ -4,7 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<bean id="userHolder" class="com.study.thinking.in.spring.bean.lifecycle.UserHolder" autowire="constructor">
+<bean class="com.study.thinking.in.spring.bean.lifecycle.MyInstantiationAwareBeanPostProcessor"/>
+
+<bean id="userHolder" class="com.study.thinking.in.spring.bean.lifecycle.UserHolder" autowire="constructor"
+      init-method="customInit"  destroy-method="doDestroy">
     <property name="number" value="10"/>
     <property name="description" value="This is user holder"/>
 </bean>
