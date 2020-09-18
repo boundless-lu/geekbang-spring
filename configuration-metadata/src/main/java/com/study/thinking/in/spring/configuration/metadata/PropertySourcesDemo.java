@@ -4,27 +4,24 @@ import com.study.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.MapPropertySource;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: 基于Java注解的 springIOC 容器 元信息配置示例
+ * @Description: 外部化配置示例
  * @Author Xiaoyaoyou
- * @Date: 2020/9/17 16:26
+ * @Date: 2020/9/18 10:18
  * @Version 1.0
  */
 
-@ImportResource("META-INF/dependency-lookup-context.xml")
-@Import(User.class)
-@PropertySource("META-INF/user.properties")   //Java8+  @Repeatable支持
 @PropertySource("META-INF/user.properties")
-public class AnnotatedSpringIocContainerMetadataConfigurationDemo {
+public class PropertySourcesDemo {
 
     @Bean
-    public User configuredUser(@Value("${user.id}") Long id,@Value("${user.name}")String name){
+    public User user(@Value("${user.id}") Long id, @Value("${user.name}")String name){
         User user = new User();
         user.setId(id);
         user.setName(name);
@@ -32,8 +29,16 @@ public class AnnotatedSpringIocContainerMetadataConfigurationDemo {
     }
 
     public static void main(String[] args) {
+
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(AnnotatedSpringIocContainerMetadataConfigurationDemo.class);
+        context.register(PropertySourcesDemo.class);
+
+        //扩展Environment中的PropertySources
+        //添加PropertySources 操作必须在 refresh方法 之前完成
+        Map<String,Object> property = new HashMap<>();
+        property.put("user.name","dailu");
+        org.springframework.core.env.PropertySource propertySource = new MapPropertySource("first-property-sources",property);
+        context.getEnvironment().getPropertySources().addFirst(propertySource);
 
         context.refresh();
 
@@ -41,7 +46,7 @@ public class AnnotatedSpringIocContainerMetadataConfigurationDemo {
         for (Map.Entry<String,User> entry : beansOfType.entrySet()){
             System.out.printf("user Bean name : [%s],  context : %s \n",entry.getKey(),entry.getValue());
         }
-
+        System.out.println(context.getEnvironment().getPropertySources());
         context.close();
 
     }
