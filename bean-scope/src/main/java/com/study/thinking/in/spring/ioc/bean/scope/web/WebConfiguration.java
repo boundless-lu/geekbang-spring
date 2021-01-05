@@ -24,7 +24,7 @@ public class WebConfiguration {
     public User user(){
         User user = new User();
         user.setId(12L);
-        user.setName("代璐");
+        user.setName("逍遥游");
         return user;
     }
 

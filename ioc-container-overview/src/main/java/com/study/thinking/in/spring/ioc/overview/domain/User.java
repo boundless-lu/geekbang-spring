@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public class User implements BeanNameAware {
 
@@ -22,7 +23,13 @@ public class User implements BeanNameAware {
 
     private List<City> lifeCities;
 
+    private Company company;
+
     private transient String beanName;
+
+    private Properties context;
+
+    private String contextAsText;
 
     public static User createUser() {
         User user = new User();
@@ -71,6 +78,14 @@ public class User implements BeanNameAware {
         this.lifeCities = lifeCities;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public Resource getLocalConfigFile() {
         return localConfigFile;
     }
@@ -79,16 +94,36 @@ public class User implements BeanNameAware {
         this.localConfigFile = localConfigFile;
     }
 
+    public String getContextAsText() {
+        return contextAsText;
+    }
+
+    public void setContextAsText(String contextAsText) {
+        this.contextAsText = contextAsText;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", localConfigFile=" + localConfigFile +
                 ", city=" + city +
                 ", workCities=" + Arrays.toString(workCities) +
                 ", lifeCities=" + lifeCities +
-                ", localConfigFile=" + localConfigFile +
+                ", company=" + company +
+                ", beanName='" + beanName + '\'' +
+                ", context=" + context +
+                ", contextAsText='" + contextAsText + '\'' +
                 '}';
+    }
+
+    public Properties getContext() {
+        return context;
+    }
+
+    public void setContext(Properties context) {
+        this.context = context;
     }
 
     @PostConstruct

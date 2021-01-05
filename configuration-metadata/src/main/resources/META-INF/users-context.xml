@@ -11,7 +11,7 @@
     <!-- 初始为普通BeanDefinition   GenericBeanDefinition  最终为RootBeanDefinition-->
     <!--    <bean id="user" class="com.study.thinking.in.spring.ioc.overview.domain.User">-->
     <!--        <property name="id" value="15" />-->
-    <!--        <property name="name" value="代璐" />-->
+    <!--        <property name="name" value="逍遥游" />-->
     <!--        <property name="localConfigFile" value="classpath:/META-INF/user-config.properties" />-->
     <!--        <property name="city" value="HANGZHOU" />-->
     <!--        <property name="workCities" value="HANGZHOU,BEIJING" />-->
@@ -23,7 +23,7 @@
     <!--        </property>-->
     <!--    </bean>-->
 
-    <user:user id="101" name="代璐" city="HANGZHOU"/>
+    <user:user id="101" name="逍遥游" city="HANGZHOU"/>
 
 
 </beans>

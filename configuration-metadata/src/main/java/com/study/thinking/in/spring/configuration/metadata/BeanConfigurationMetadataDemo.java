@@ -19,7 +19,7 @@ public class BeanConfigurationMetadataDemo {
     public static void main(String[] args) {
 
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(User.class);
-        beanDefinitionBuilder.addPropertyValue("name","代璐");
+        beanDefinitionBuilder.addPropertyValue("name","逍遥游");
 
         AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
 
