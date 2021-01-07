@@ -15,6 +15,7 @@
         <prop key="name">xiaoyoayou</prop>
     </util:properties>
 
+    <!-- 声明 ConversionServiceFactoryBean  并且id必须为conversionService！！！ -->
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters" >
             <bean class="com.study.thinking.in.spring.conversion.PropertiesToStringConverter"/>
