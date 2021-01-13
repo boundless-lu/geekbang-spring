@@ -5,7 +5,6 @@ import org.springframework.core.GenericTypeResolver;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,10 +45,6 @@ public class GenericTypeResolverDemo {
 
     public static StringList getStringList(){
         return null;
-    }
-
-    static class StringList extends ArrayList<String>{//泛型参数具体化（字节码有记录）
-
     }
 
     public static void display(Class<?> containingClass,Class<?> genericIfc,String methodName,Class... argumentsType) throws NoSuchMethodException {
