@@ -15,6 +15,6 @@ public class MySpringEvent extends ApplicationEvent {
      *               (must not be {@code null})
      */
     public MySpringEvent(String source) {
-        super(source);
+        super(String.format("[事件线程：%s] : %s",Thread.currentThread().getName(),source));
     }
 }

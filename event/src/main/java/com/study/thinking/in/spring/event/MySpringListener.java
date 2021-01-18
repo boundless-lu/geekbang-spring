@@ -10,6 +10,6 @@ import org.springframework.context.ApplicationListener;
 public class MySpringListener implements ApplicationListener<MySpringEvent> {
     @Override
     public void onApplicationEvent(MySpringEvent event) {
-        System.out.printf("[%s]监听到spring应用上下文事件：%s\n", Thread.currentThread().getName(), event);
+        System.out.printf("[监听线程：%s]监听到spring应用上下文事件：%s\n", Thread.currentThread().getName(), event);
     }
 }
