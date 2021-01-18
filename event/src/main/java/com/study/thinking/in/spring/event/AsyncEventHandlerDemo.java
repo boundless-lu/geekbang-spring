@@ -1,5 +1,6 @@
 package com.study.thinking.in.spring.event;
 
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.ContextClosedEvent;
@@ -48,6 +49,17 @@ public class AsyncEventHandlerDemo {
                         taskService.shutdown();
                     }
                 }
+            });
+
+            simpleApplicationEventMulticaster.addApplicationListener(new ApplicationListener<MySpringEvent>() {
+                @Override
+                public void onApplicationEvent(MySpringEvent event) {
+                    throw new RuntimeException("故意抛出异常");
+                }
+            });
+
+            simpleApplicationEventMulticaster.setErrorHandler(e->{
+                System.err.println("事件异常处理："+e.getMessage());
             });
         }
         //3.发布自定义spring事件
