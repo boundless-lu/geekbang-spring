@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.env.Environment;
 
 /**
- * @Description: 注入 {@link Environment} 示例
+ * @Description: 依赖注入 {@link Environment} 示例
  * @Author Xiaoyaoyou
  * @Date: 2021/1/20 21:46
  * @Version 1.0
